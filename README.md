@@ -1,25 +1,22 @@
-
 Real-Time Analytics with Cassandra & Hadoop
 ===========================================
 
 An introduction to a real-time analytics engine using Cassandra
 and Hadoop.
 
-This session will use both the open-source vanilla Cassandra and
-enterprise product from Datastax. Datastax Enterprise provides a
-simple way of interfacing Cassandra with Hadoop, and the techniques
-used in this class are directly implementable in the open-source version
-of Cassandra.
+This session will use both the enterprise product from Datastax.
+Datastax Enterprise provides a simple way of interfacing Cassandra
+with Hadoop, and the techniques used in this class are directly
+implementable in the open-source version of Cassandra.
 
 To download DSE, you will need to register with Datastax and
 log into the system with your credentials, which will be emailed to you.
 
-We will use Cassandra 1.2.10 and DSE 3.1.
+We will use DSE 3.14.
 
 Requirements
 ------------
 * \*NIX machine
-* Download [Cassandra](http://cassandra.apache.org/download)
 * Download [Datastax Enterprise](http://www.datastax.com/download)
 * This code
 

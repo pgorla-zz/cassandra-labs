@@ -7,11 +7,11 @@ the Cassandra Query Language, and add data into Cassandra.
 
 Lab 1: Start Cassandra
 ----------------------
-Unpack the vanilla Cassandra package.
+Unpack Datastax Enterprise.
 
-    $ tar xzvf apache-cassandra-1.2.10-bin.tar.gz
-    $ cd apache-cassandra-1.2.10
-    $ ls conf/
+    $ tar xzvf dse-3.1.4-bin.tar.gz
+    $ cd dse-3.1.4/
+    $ ls resources/cassandra/conf/
 
 We will now examine the `conf/` directory.
 
@@ -29,7 +29,7 @@ specified.
 
 Now we start Cassandra.
 
-    $ bin/cassandra -f
+    $ bin/dse cassandra -f
     ...
      INFO 01:34:36,623 Using synchronous/threadpool thrift server on localhost : 9160
      INFO 01:34:36,624 Listening for thrift clients...
@@ -41,7 +41,7 @@ occur on screen.
 If you had multiple nodes running concurrently, you would be able to see
 them join the system.
 
-Congratulations! You've started your first Cassandra node.
+Congratulations! You have started your first Cassandra node.
 
 
 Lab 2: Cassandra Query Language
@@ -109,7 +109,7 @@ not recommended.
 
 Create a new keyspace, Candyshop
 
-    cqlsh> CREATE KEYSPACE "CandyShop"
+    cqlsh> CREATE KEYSPACE "Patisserie"
     WITH replication = 
     {'class': 'SimpleStrategy', 'replication_factor': 1 } ;
 
@@ -119,11 +119,11 @@ foreground. What has happened?
 You should see Cassandra reflect the newly-written keyspace, and you
 should also see the Memtable being flushed.
 
-    cqlsh> USE "CandyShop";
+    cqlsh> USE "Patisserie";
 
 Now that we have a keyspace, we can create a column family.
 
-    cqlsh:CandyShop> CREATE COLUMNFAMILY daily_visitors
+    cqlsh:Patisserie> CREATE TABLE daily_visitors
     (day text,
     time timestamp,
     visitors text,
@@ -134,21 +134,21 @@ column will be an hour.
 
 NOTE: Pay attention to the single quotes; CQLsh does not accept double quotes.
 
-    cqlsh:CandyShop> INSERT INTO daily_visitors
+    cqlsh:Patisserie> INSERT INTO daily_visitors
     (day, time, visitors)
     VALUES ('Monday', '2013-01-01 15:00+0000', '12');
 
-    cqlsh:CandyShop> INSERT INTO daily_visitors
+    cqlsh:Patisserie> INSERT INTO daily_visitors
     (day, time, visitors)
     VALUES ('Monday', '2013-01-01 21:00+0000', '20');
 
-    cqlsh:CandyShop> INSERT INTO daily_visitors
+    cqlsh:Patisserie> INSERT INTO daily_visitors
     (day, time, visitors)
     VALUES ('Tuesday', '2013-01-02 05:00+0000', '56');
 
 Now select back the information.
 
-    cqlsh:CandyShop> SELECT * FROM daily_visitors ;
+    cqlsh:Patisserie> SELECT * FROM daily_visitors ;
 
      day     | time                     | visitors
     ---------+--------------------------+----------
@@ -158,7 +158,7 @@ Now select back the information.
 
 We can even specify a specific day to retrieve.
 
-    cqlsh:CandyShop> SELECT visitors
+    cqlsh:Patisserie> SELECT visitors
     FROM daily_visitors WHERE day = 'Monday' ;
 
     visitors
@@ -169,7 +169,7 @@ We can even specify a specific day to retrieve.
 Since we used a composite column for our schema, we can also specify
 both components when retrieving a row.
 
-    cqlsh:CandyShop> SELECT visitors
+    cqlsh:Patisserie> SELECT visitors
     FROM daily_visitors
     WHERE day = 'Monday' and time = '2013-01-01 16:00:00+0100';
 
