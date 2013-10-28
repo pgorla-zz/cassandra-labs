@@ -34,7 +34,7 @@ The cell-value pairs are the fundamental components of the Cassandra
 data model.  We will use Thrift to examine how CQL constructs are
 physically represented on disk.
 
-    $ cassandra-cli
+    $ bin/cassandra-cli
     Connected to: "Test Cluster" on 127.0.0.1/9160
 
 List out the commands in the cli client.
@@ -94,7 +94,7 @@ empty values are simply not stored.
  
 Lets examine this another way: in a second shell, open up `cqlsh`. 
 
-    $ cqlsh
+    $ bin/cqlsh
     Connected to Test Cluster at localhost:9160.
 
     cqlsh> use "Patisserie" ;
@@ -246,6 +246,8 @@ to using them.
 - When selecting a collection, that entire value is retrieved. Maps, lists,
   and sets, therefore, do not provide the same level of scalability as a
   clearly defined data model.
+- Deleting either an element in the collection or the entire collection
+  requires a query. Consider performance implications.
 
 
 Extra Credit
@@ -260,3 +262,15 @@ column families with compact storage.
 With COMPACT STORAGE, each logical row corresponds to exactly one physical column.
 
 http://www.datastax.com/dev/blog/schema-in-cassandra-1-1
+
+
+More details on the differences between CQL and Thrift can be found here:
+http://www.datastax.com/dev/blog/cql3-for-cassandra-experts
+
+
+Dynamic Rows in CQL
+-------------------
+There has been some confusion over whether CQL supports dynamic colummns.
+The short answer is: it does. The long answer is written in this clear
+blog post by Jonathan Ellis.
+http://www.datastax.com/dev/blog/does-cql-support-dynamic-columns-wide-rows
