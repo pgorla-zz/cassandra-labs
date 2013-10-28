@@ -33,6 +33,9 @@ Now run the file.
 
     $ ./wordcount
 
+This script loads the data into CFS, and runs the standard Hadoop
+wordcount example jar over the data.
+
 
 Lab 2: Running Hive Demo
 -----------------------
